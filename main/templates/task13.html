@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block title %}Задача 13{% endblock %}
+
+{% block content %}
+<h1>Задача 13 — фильтр транспортных компаний</h1>
+
+<p>
+  Введи компании и числа через пробел. Результат появится ниже.
+</p>
+
+<form method="get" class="card">
+  <label>
+    Компании (через пробел):
+    <input name="companies" value="{{ companies_raw }}" placeholder="Газелька2 Доставочка1 Перевозки007">
+  </label>
+
+  <label>
+    Дни (через пробел):
+    <input name="days" value="{{ days_raw }}" placeholder="10 9 9">
+  </label>
+
+  <label>
+    Максимум дней:
+    <input name="max_days" value="{{ max_days_raw }}" placeholder="9">
+  </label>
+
+  <button type="submit">Посчитать</button>
+</form>
+
+{% if error %}
+  <p class="error">{{ error }}</p>
+{% endif %}
+
+{% if result %}
+  <h2>Подходящие компании</h2>
+  <pre>{% for name in result %}{{ name }}
+{% endfor %}</pre>
+{% endif %}
+
+{% endblock %}

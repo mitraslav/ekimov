@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block title %}Я и программа{% endblock %}
+
+{% block content %}
+<h1 id="start">Я и моя образовательная программа</h1>
+
+<nav class="inner-nav">
+  <a href="#me">Я</a>
+  <a href="#program">Программа</a>
+  <a href="#classmates">Сокурсники</a>
+</nav>
+
+<section id="me" class="card">
+  <h2>Я</h2>
+  <img src="{{ me.photo }}" alt="Моё фото" width="200">
+  <ul>
+    <li><b>ФИО:</b> {{ me.fio }}</li>
+    <li><b>Email:</b> {{ me.email }}</li>
+    <li><b>Телефон:</b> {{ me.phone }}</li>
+  </ul>
+
+  <a href="#start">К началу</a>
+</section>
+
+
+<section id="program" class="card">
+  <h2>Программа</h2>
+  <p><b>Название:</b> {{ program.title }}</p>
+  <p><b>Описание:</b> {{ program.description }}</p>
+
+  <h3>Руководитель</h3>
+  <img src="{{ program.head.photo }}" alt="Руководитель" width="160">
+  <p>{{ program.head.fio }} — {{ program.head.email }}</p>
+
+  <h3>Менеджер</h3>
+  <img src="{{ program.manager.photo }}" alt="Менеджер" width="160">
+  <p>{{ program.manager.fio }} — {{ program.manager.email }}</p>
+
+
+  <h3>Что мне нравится в программе</h3>
+  <ol>
+    <li>Лабораторная практика</li>
+    <li>Учебные материалы
+      <ul>
+        <li>Онлайн-курсы</li>
+        <li>Электронные учебники</li>
+      </ul>
+    </li>
+  </ol>
+
+  <a href="#start">К началу</a>
+</section>
+
+<section id="classmates" class="card">
+  <h2>Мои сокурсники</h2>
+  <ul>
+    {% for s in classmates %}
+      <li>
+        <img src="{{ s.photo }}" alt="Фото сокурсника" width="120">
+        <div>
+          <b>{{ s.fio }}</b><br>
+          {{ s.email }}<br>
+          {{ s.phone }}
+          {{ s.city }}
+        </div>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="#start">К началу</a>
+</section>
+
+{% endblock %}

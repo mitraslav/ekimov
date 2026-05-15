@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}ОП Психология ВШЭ{% endblock %}
+
+{% block content %}
+
+<h1 id="top" class="mb-4">Образовательная программа «Психология» НИУ ВШЭ</h1>
+
+<nav class="mb-3">
+  <a href="#about" class="me-3">О программе</a>
+  <a href="#advantages" class="me-3">Преимущества</a>
+</nav>
+
+<hr>
+
+<section id="about" class="mb-4">
+  <h2>Кратко о программе</h2>
+
+  <p>
+    Программа «Психология» НИУ ВШЭ направлена на фундаментальную
+    подготовку в области общей, социальной и когнитивной психологии.
+  </p>
+
+  <img src="{% static 'hse.jpg' %}" alt="ВШЭ" class="img-fluid rounded mb-2" style="max-width: 300px;">
+  <p class="text-muted"><small>НИУ ВШЭ — один из ведущих университетов России.</small></p>
+
+  <ul>
+    <li>Современные академические подходы</li>
+    <li>Исследовательская практика</li>
+    <li>Проектная работа</li>
+  </ul>
+</section>
+
+<hr>
+
+<section id="advantages">
+  <h2>Преимущества обучения</h2>
+
+  <ol>
+    <li>Фундаментальная теория</li>
+    <li>Практические навыки
+        <ul>
+            <li>Работа с данными</li>
+            <li>Анализ исследований</li>
+        </ul>
+    </li>
+    <li>Междисциплинарность</li>
+  </ol>
+</section>
+
+{% endblock %}

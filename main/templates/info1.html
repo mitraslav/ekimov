@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Психология{% endblock %}
+
+{% block content %}
+
+<h1 id="top" class="mb-4">Психология</h1>
+
+<nav class="mb-3">
+  <a href="#definition" class="me-3">Что это</a>
+  <a href="#branches" class="me-3">Разделы</a>
+</nav>
+
+<hr>
+
+<section id="definition" class="mb-4">
+  <h2>Что такое психология</h2>
+
+  <p>
+    Психология — это наука о психике и поведении человека,
+    изучающая эмоции, мышление, личность и социальное взаимодействие.
+  </p>
+
+  <img src="{% static 'psychology.jpg' %}" alt="Психология" class="img-fluid rounded mb-2" style="max-width: 300px;">
+  <p class="text-muted"><small>Психология изучает внутренние процессы человека.</small></p>
+
+  <ul>
+    <li>Эмоции</li>
+    <li>Мотивация</li>
+    <li>Личность</li>
+  </ul>
+</section>
+
+<hr>
+
+<section id="branches">
+  <h2>Основные разделы</h2>
+
+  <ol>
+    <li>Общая психология</li>
+    <li>Социальная психология
+        <ul>
+            <li>Групповая динамика</li>
+            <li>Межличностное взаимодействие</li>
+        </ul>
+    </li>
+    <li>Клиническая психология</li>
+  </ol>
+</section>
+
+{% endblock %}

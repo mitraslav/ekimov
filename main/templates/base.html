@@ -1,0 +1,42 @@
+{% load static %} <!--Подгружаем static-->
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>{% block title %}КР1{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body id="top">
+  <header class="navbar">
+    <a class="nav-item" href="{% url 'home' %}">
+      <img class="logo" src="{% static 'logo.jpg' %}" alt="logo">
+      Главная
+    </a>
+
+    <a class="nav-item" href="{% url 'info1' %}">Психология</a>
+    <a class="nav-item" href="{% url 'info2' %}">ОП "Психология"</a>
+    <a class="nav-item" href="{% url 'task13' %}">Задача 13</a>
+    <a class="nav-item" href="{% url 'education' %}">Учебный процесс</a>
+
+
+    <a class="nav-item" href="{% url 'education' %}#classmates">К сокурсникам</a>
+
+
+    <a class="nav-item" href="https://www.djangoproject.com/" target="_blank" rel="noopener noreferrer">
+      Django.org
+    </a>
+
+    <a class="nav-item" href="{% url 'requirements' %}">Требования задания</a>
+  </header>
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="footer">
+    <a href="#top">Наверх</a>
+  </footer>
+</body>
+</html>
