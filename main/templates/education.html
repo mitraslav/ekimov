@@ -12,30 +12,48 @@
 
 <section id="me" class="card">
   <h2>Я</h2>
-  <img src="{{ me.photo }}" alt="Моё фото" width="200">
-  <ul>
-    <li><b>ФИО:</b> {{ me.fio }}</li>
-    <li><b>Email:</b> {{ me.email }}</li>
-    <li><b>Телефон:</b> {{ me.phone }}</li>
-  </ul>
+
+  {% if me %}
+    {% if me.photo %}
+      <img src="{{ me.photo }}" alt="Моё фото" width="200">
+    {% endif %}
+    <ul>
+      <li><b>ФИО:</b> {{ me.fio }}</li>
+      <li><b>Email:</b> {{ me.email }}</li>
+      <li><b>Телефон:</b> {{ me.phone }}</li>
+    </ul>
+  {% else %}
+    <p>Данные обо мне ещё не добавлены в базу.</p>
+  {% endif %}
 
   <a href="#start">К началу</a>
 </section>
 
-
 <section id="program" class="card">
   <h2>Программа</h2>
-  <p><b>Название:</b> {{ program.title }}</p>
-  <p><b>Описание:</b> {{ program.description }}</p>
+
+  {% if program %}
+    <p><b>Название:</b> {{ program.title }}</p>
+    <p><b>Описание:</b> {{ program.description }}</p>
+  {% else %}
+    <p>Образовательная программа ещё не добавлена в базу.</p>
+  {% endif %}
 
   <h3>Руководитель</h3>
-  <img src="{{ program.head.photo }}" alt="Руководитель" width="160">
-  <p>{{ program.head.fio }} — {{ program.head.email }}</p>
+  {% if head %}
+    {% if head.photo %}
+      <img src="{{ head.photo }}" alt="Руководитель" width="160">
+    {% endif %}
+    <p>{{ head.fio }} — {{ head.email }}</p>
+  {% endif %}
 
   <h3>Менеджер</h3>
-  <img src="{{ program.manager.photo }}" alt="Менеджер" width="160">
-  <p>{{ program.manager.fio }} — {{ program.manager.email }}</p>
-
+  {% if manager %}
+    {% if manager.photo %}
+      <img src="{{ manager.photo }}" alt="Менеджер" width="160">
+    {% endif %}
+    <p>{{ manager.fio }} — {{ manager.email }}</p>
+  {% endif %}
 
   <h3>Что мне нравится в программе</h3>
   <ol>
@@ -53,21 +71,63 @@
 
 <section id="classmates" class="card">
   <h2>Мои сокурсники</h2>
-  <ul>
-    {% for s in classmates %}
-      <li>
-        <img src="{{ s.photo }}" alt="Фото сокурсника" width="120">
-        <div>
-          <b>{{ s.fio }}</b><br>
-          {{ s.email }}<br>
-          {{ s.phone }}
-          {{ s.city }}
-        </div>
-      </li>
-    {% endfor %}
-  </ul>
+
+  <form method="get" class="mb-3">
+    <label>
+      Фильтр по городу:
+      <select name="city">
+        <option value="">Все города</option>
+        {% for city in cities %}
+          <option value="{{ city }}" {% if city == city_filter %}selected{% endif %}>
+            {{ city }}
+          </option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>
+      Сортировка:
+      <select name="sort">
+        <option value="fio" {% if sort == "fio" %}selected{% endif %}>по ФИО</option>
+        <option value="city" {% if sort == "city" %}selected{% endif %}>по городу</option>
+        <option value="email" {% if sort == "email" %}selected{% endif %}>по email</option>
+      </select>
+    </label>
+
+    <button type="submit">Применить</button>
+  </form>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Фото</th>
+        <th>ФИО</th>
+        <th>Email</th>
+        <th>Телефон</th>
+        <th>Город</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for s in classmates %}
+        <tr>
+          <td>
+            {% if s.photo %}
+              <img src="{{ s.photo }}" alt="Фото сокурсника" width="80">
+            {% endif %}
+          </td>
+          <td>{{ s.fio }}</td>
+          <td>{{ s.email }}</td>
+          <td>{{ s.phone }}</td>
+          <td>{{ s.city }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="5">Сокурсники не найдены.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
 
   <a href="#start">К началу</a>
 </section>
-
 {% endblock %}

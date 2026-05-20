@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}Сайт из базы данных{% endblock %}
+
+{% block content %}
+<h1>Сайт с уникальным контентом из базы данных</h1>
+
+<section class="card">
+  <h2>Фильтрация и сортировка страниц</h2>
+
+  <form method="get">
+    <label>
+      Категория:
+      <select name="category">
+        <option value="">Все категории</option>
+        {% for item in categories %}
+          <option value="{{ item }}" {% if item == category %}selected{% endif %}>
+            {{ item }}
+          </option>
+        {% endfor %}
+      </select>
+    </label>
+
+    <label>
+      Сортировка:
+      <select name="sort">
+        <option value="order" {% if sort == "order" %}selected{% endif %}>по порядку</option>
+        <option value="title" {% if sort == "title" %}selected{% endif %}>по названию</option>
+        <option value="category" {% if sort == "category" %}selected{% endif %}>по категории</option>
+        <option value="-updated_at" {% if sort == "-updated_at" %}selected{% endif %}>сначала обновлённые</option>
+      </select>
+    </label>
+
+    <button type="submit">Применить</button>
+  </form>
+</section>
+
+<section class="card">
+  <h2>Статистика по категориям</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Категория</th>
+        <th>Количество страниц</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in category_stats %}
+        <tr>
+          <td>{{ item.category }}</td>
+          <td>{{ item.count }}</td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="2">Нет данных.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+
+<section class="card">
+  <h2>Страницы</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Название</th>
+        <th>Категория</th>
+        <th>Обновлено</th>
+        <th>Открыть</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for page in pages %}
+        <tr>
+          <td>{{ page.title }}</td>
+          <td>{{ page.category }}</td>
+          <td>{{ page.updated_at|date:"d.m.Y H:i" }}</td>
+          <td><a href="{% url 'site_page_detail' page.slug %}">Перейти</a></td>
+        </tr>
+      {% empty %}
+        <tr>
+          <td colspan="4">Страницы не найдены.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</section>
+{% endblock %}
